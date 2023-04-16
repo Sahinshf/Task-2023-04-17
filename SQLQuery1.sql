@@ -88,6 +88,9 @@ VALUES ( 1 , 12 , 3,  9.99 ),
 
 --Reserved Tickets
 
+
+CREATE VIEW [RESERVED_TICKETS]
+AS
 SELECT c.customerName , c.customerSurname , m.filmName , m.filmGenre , t.cinemaName , s.startTime , s.endTime , ti.Hallcol , ti.Hallrow  FROM ShowTime s
 INNER JOIN Theatre t
 ON s.cinemaID = t.cinemaId
@@ -98,9 +101,12 @@ ON s.showTimeId = ti.showTimeID
 INNER JOIN Customer c
 ON  c.customerId= ti.customerID
 
+SELECT * FROM [RESERVED_TICKETS]
 
 --Available Tickets
 
+CREATE VIEW [AVAILABLE_TICKETS]
+AS
 SELECT  m.filmName , m.filmGenre , t.cinemaName , s.startTime , s.endTime , ti.Hallcol , ti.Hallrow , ti.seatStatus  FROM ShowTime s
 INNER JOIN Theatre t
 ON s.cinemaID = t.cinemaId
@@ -109,5 +115,9 @@ ON s.movieID = m.movieId
 INNER JOIN Ticket ti
 ON s.showTimeId = ti.showTimeID
 WHERE ti.customerID IS NULL  
+
+SELECT * FROM [AVAILABLE_TICKETS]
+
+
 --INNER JOIN Customer c
 --ON  c.customerId= ti.customerID
